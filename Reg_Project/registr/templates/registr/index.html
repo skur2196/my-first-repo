@@ -1,0 +1,37 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистр онкобольных ОДКБ</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'registr/css/normalize.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'registr/css/style.css' %}">
+</head>
+<body>
+  <div class="center">
+      <h1 class="title"> Регист онкобольных детей</h1>
+      <div class="form-authorization"> 
+          <form action="" method="post" autocomplete="off">
+            {% csrf_token %}
+              <div class="container">
+                  <label for="uname"><b>Имя пользователя</b></label>
+                  <input type="text" placeholder="Введите имя пользователя" name="uname" id="uname" required>
+                  <label for="psw"><b>Пароль</b></label>
+                  <input type="password" placeholder="Введите пароль" name="psw" id="psw" required>            
+                  {% if is_not_exist %}
+                  <p class="user-not-exists">Такого пользователя не существует</p>
+                  {% endif %}
+                  {% if password_incorrect %}
+                  <p class="password-incorrect">Неверный пароль</p>
+                  {% endif %}
+                  <button class="log" type="submit" id="log-button">Вход</button>
+                </div>
+          </form>
+      </div>
+  </div>
+</body>
+</html>

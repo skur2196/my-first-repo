@@ -1,0 +1,31 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор регистра</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'registr/css/normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'registr/css/style.css' %}">
+</head>
+<body>
+  <header>
+    <div class="logout-link">
+      <p>{{ user.user_name }}</p>
+      <p>{{ user.position }}</p>
+      <a href="/logout/" >Выход</a>
+    </div>
+  </header>
+  <div class="center">
+      <div class="container">
+        <a class="choose-reg" href="1/">Регистр больных детей, страдающих гемофилией, болезнью Вилльбранда и другими наследственными коагулопатиями</a>
+        <a class="choose-reg" href="2/">Регистр больных детей, страдающих тромбоцитопенией и тромбоцитопатией</a>
+        <a class="choose-reg" href="3/">Регистр больных детей, страдающих наследственной анемией</a>
+        <a class="choose-reg" href="4/">Регистр больных детей, страдающих приобретенной апластической анемией</a>
+      </div>
+  </div>
+</body>
+</html>

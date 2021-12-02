@@ -1,0 +1,54 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор регистра</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'registr/css/normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'registr/css/style.css' %}">
+</head>
+<body>
+  <header>
+    <div class="logout-link">
+      <p>{{ user.user_name }}</p>
+      <p>{{ user.position }}</p>
+      <a href="/register/">Выбор регистра</a>
+      <a href="/logout/" >Выход</a>
+    </div>
+  </header>
+  {% if user.access == '3' %}
+  <div class="center">
+    <p>ФИО пациента : {{ patient.fio }}</p>
+    <p>Дата рождения : {{ patient.date_birthday }}</p>    
+    <p>Адресс : {{ patient.address }}</p>
+    <p>Диагноз МКБ : {{ patient.diagnosis }}</p>
+    <p>МНН, дозировка : {{ patient.dosage }}</p>
+    <p>Схема лечения : {{ patient.therapy }}</p>
+    <p>Месячная потребность : {{ patient.monthly_need }}</p>
+    <p>Годовая потребность : {{ patient.annual_need }}</p>
+    <p>Последняя редация : {{ patient.last_editor.user_name }}</p>
+  </div>
+  {% else %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Фамилия пациента: <input type="text" name="sname" value="{{ patient.last_name }}"></p>
+    <p>Имя пациента: <input type="text" name="fname" value="{{ patient.first_name }}"></p>
+    <p>Отчество пациента: <input type="text" name="fathername" value="{{ patient.father_name }}"></p>
+    <p>Дата рождения пациента: <input type="date" name="dbirth" value="{{ patient.date_birthday }}"></p>
+    <p>Адрес пациента: <input type="text" name="address" value="{{ patient.address }}"></p>
+    <p>Диагноз МКБ: <input type="text" name="diagnosis" value="{{ patient.diagnosis }}"></p>
+    <p>Дозировка МНН: <input type="text" name="dosage" value="{{ patient.dosage }}"></p>
+    <p>Схема лечения: <input type="text" name="therapy" value="{{ patient.therapy }}"></p>
+    <p>Месячная потребность: <input type="text" name="monthly_need" value="{{ patient.monthly_need }}"></p>
+    <p>Годовая пациента: <input type="text" name="annual_need" value="{{ patient.annual_need }}"></p>
+    <p>Регистр: <input type="text" name="register" value="{{ patient.type_register }}"></p>
+    <p>{{ form.as_p }}</p>
+    <button type="submit">Обновить данные пациента</button>
+  </form>
+  {% endif %}
+</body>
+</html>

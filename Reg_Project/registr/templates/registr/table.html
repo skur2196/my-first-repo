@@ -1,0 +1,65 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор пациента</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'registr/css/normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'registr/css/style.css' %}">
+</head>
+<body>
+  <header>
+    <div class="logout-link">
+      <p>{{ user.user_name }}</p>
+      <p>{{ user.position }}</p>
+      <a href="/register/">Выбор регистра</a>
+      <a href="/logout/" >Выход</a>
+    </div>
+  </header>
+  {% if user.access == '2' or user.access == '1'%}
+  <form action="add/">
+    <button>Добавить пациента</button>
+  </form>
+  {% endif %}
+  <div class="center">
+    <h1>Выберите пациента </h1>
+    <table class="table-patient">
+      <thead>
+        <tr>
+          <th rowspan="2">№</th>
+          <th rowspan="2">Диагноз МКБ</th>
+          <th rowspan="2">ФИО</th>
+          <th rowspan="2">Дата рождения</th>
+          <th rowspan="2">Адрес</th>
+          <th colspan="4">Получающие профилактическое лечение в рамках Федеральных и региональных программ</th>
+        </tr>
+        <tr>
+          <th>МНН дозировка</th>
+          <th>Схема лечения</th>
+          <th>Месячная потребность</th></a>
+          <th>Годовая потребность</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+        <tr>
+          <td><a href="{{ patient.pk }}/">{{ patient.pk }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.diagnosis }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.fio }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.date_birthday }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.address }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.dosage }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.therapy }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.monthly_need }}</a></td>
+          <td><a href="{{ patient.pk }}/">{{ patient.annual_need }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
